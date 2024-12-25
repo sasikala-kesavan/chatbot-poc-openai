@@ -1,31 +1,21 @@
 # Code refactored from https://docs.streamlit.io/knowledge-base/tutorials/build-conversational-apps
 
-import openai
+from openai import OpenAI
 import streamlit as st
 
-with st.sidebar:
-    st.title('Ericsson EOC Quotation Creation Bot')
-    openai.api_key = st.secrets['general']['OPENAI_API_KEY']
-    
-if "messages" not in st.session_state:
-    st.session_state.messages = []
+# Streamlit app title
+st.title('Ericsson EOC Quotation Creation Bot')
+# Set your OpenAI API key (you can also set it in environment variables for security)
+client = OpenAI(
+    api_key=st.secrets['general']['OPENAI_API_KEY'],  # This is the default and can be omitted
+)
 
-for message in st.session_state.messages:
-    with st.chat_message(message["role"]):
-        st.markdown(message["content"])
-
-if prompt := st.chat_input("What is up?"):
-    st.session_state.messages.append({"role": "user", "content": prompt})
-    with st.chat_message("user"):
-        st.markdown(prompt)
-    with st.chat_message("assistant"):
-        message_placeholder = st.empty()
-        full_response = ""
-        for response in openai.ChatCompletion.create(
-            model="gpt-3.5-turbo",
-            messages=[{"role": m["role"], "content": m["content"]}
-                      for m in st.session_state.messages], stream=True):
-            full_response += response.choices[0].delta.get("content", "")
-            message_placeholder.markdown(full_response + "▌")
-        message_placeholder.markdown(full_response)
-    st.session_state.messages.append({"role": "assistant", "content": full_response})
+chat_completion = client.chat.completions.create(
+    messages=[
+        {
+            "role": "user",
+            "content": "Say this is a test",
+        }
+    ],
+    model="gpt-4o",
+)
