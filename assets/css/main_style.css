@@ -1,0 +1,73 @@
+#MainMenu {
+    visibility: hidden;
+}
+
+footer {
+    visibility: hidden;
+}
+
+header {
+    visibility: hidden;
+}
+
+.title-container {
+    display: inline-flex;
+    align-items: center;
+}
+
+.title-container>img {
+    height: 40px;
+    width: 50px;
+    top: -4px;
+    position: relative;
+}
+
+/* Hide the default Streamlit sidebar toggle icon */
+[data-testid="stSidebarCollapsedControl"] [data-testid="stBaseButton-headerNoPadding"]>.st-emotion-cache-qsoh6x {
+    display: none;
+}
+
+/* Custom sidebar collapse button icon */
+[data-testid="stSidebarCollapsedControl"] [data-testid="stBaseButton-headerNoPadding"] {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #d3d0d0;
+    border-radius: 50%;
+    height: 3em;
+    padding: 5px;
+    box-shadow: 0px 8px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Add a custom icon to the sidebar button */
+[data-testid="stSidebarCollapsedControl"] [data-testid="stBaseButton-headerNoPadding"]::before {
+    content: '🛒';
+    /* Custom icon for the sidebar button (left-right arrows) */
+    font-size: 24px;
+    color: #0099ff;
+    /* Set the color of the icon */
+}
+
+/* Add a hover effect to change icon color */
+[data-testid="stSidebarCollapsedControl"] [data-testid="stBaseButton-headerNoPadding"]:hover {
+    border: 1px solid #add2fe;
+    box-shadow: 0px 8px 12px rgba(54, 158, 255, 0.2);
+    background-color: #f7faff;
+    /* Change the icon color on hover */
+}
+
+[data-testid="stChatInputSubmitButton"] {
+    color: black;
+}
+
+[role="gridcell"] td,
+thead tr th {
+    border-top: 0;
+    border-bottom: 0;
+}
+
+[data-testid="stSidebarCollapsedControl"] {
+    top: 0;
+    bottom: 5%;
+    align-items: flex-end;
+}
