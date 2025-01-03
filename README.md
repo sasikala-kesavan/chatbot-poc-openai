@@ -1,2 +1,2 @@
-# OpenAI Chatbot
+# Chatbot
 
